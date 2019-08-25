@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">PetTestProject</string>
+    <string name="hello_test_text">Hello Test!</string>
+</resources>
