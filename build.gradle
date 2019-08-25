@@ -19,10 +19,15 @@ allprojects {
     repositories {
         google()
         jcenter()
-        
+
     }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+dependencies {
+    //androidTestCompile 'com.agoda.kakao:kakao:1.4.0'
+}
+
