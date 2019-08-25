@@ -22,7 +22,7 @@ marathon {
     baseOutputDir = "./marathon"
     analytics {
         influx {
-            url = "http://influx.svc.cluster.local:8086"
+            url = "localhost:8086"
             user = "root"
             password = "root"
             dbName = "marathon"
