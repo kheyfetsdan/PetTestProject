@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
 
         val showTextView = findViewById<TextView>(R.id.labelText)
 
-        showTextView.text = "Change your *** text"
+        showTextView.text = "Change your *** pussy"
     }
 
     fun clear (view: View) {
