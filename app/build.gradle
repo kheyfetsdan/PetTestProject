@@ -1,3 +1,60 @@
+buildscript {
+    ext.kotlin_version = '1.3.20'
+    repositories {
+        jcenter()
+        maven {
+            url 'https://mvnrepository.com/artifact/com.malinskiy.marathon/usage'
+        }
+        google()
+    }
+
+    dependencies {
+        classpath "com.malinskiy.marathon:marathon-gradle-plugin:0.4.1"
+    }
+
+    //apply plugin: 'marathon'
+}
+
+apply plugin: 'marathon'
+
+marathon {
+    name = "sample-app tests"
+    baseOutputDir = "./marathon"
+    analytics {
+        influx {
+            url = "http://influx.svc.cluster.local:8086"
+            user = "root"
+            password = "root"
+            dbName = "marathon"
+        }
+    }
+    poolingStrategy {
+        operatingSystem = true
+    }
+    shardingStrategy {
+        countSharding {
+            count = 5
+        }
+    }
+
+    batchingStrategy {
+        fixedSize {
+            size = 10
+        }
+    }
+    retryStrategy {
+        fixedQuota {
+            totalAllowedRetryQuota = 200
+            retryPerTestQuota = 3
+        }
+    }
+}
+
+
+/*plugins {
+    id 'marathon' version '0.4.1'
+}*/
+
 apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
@@ -22,6 +79,7 @@ android {
     }
 }
 
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -33,4 +91,5 @@ dependencies {
     androidTestImplementation 'com.agoda.kakao:kakao:2.1.0-support'
     androidTestImplementation 'com.android.support.test:rules:1.0.2'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
+
 }
